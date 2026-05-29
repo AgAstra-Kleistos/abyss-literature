@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Spring Boot 父工程，提供默认依赖版本管理
+    所有 spring-boot-* 开头的依赖都不用写 version
+    但是子模块没有直接继承关系所以需要进行版本统一控制-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.0</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.mirror</groupId>
+    <artifactId>north-abyss</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>north-abyss</name>
+    <description>北冥文学项目</description>
+
+    <!-- 聚合工程必须用 pom 打包 -->
+    <packaging>pom</packaging>
+
+    <!-- 包含的子模块 -->
+    <modules>
+        <module>abyss-common</module>
+        <module>abyss-pojo</module>
+        <module>abyss-service</module>
+    </modules>
+
+    <!-- 版本统一管理 -->
+    <properties>
+        <spring.boot.version>3.2.0</spring.boot.version>
+        <java.version>17</java.version>
+        <mybatis-spring.version>3.0.3</mybatis-spring.version>
+        <lombok.version>1.18.30</lombok.version>
+        <knife4j.version>4.5.0</knife4j.version>
+        <aliyun.sdk.oss>3.10.2</aliyun.sdk.oss>
+        <jjwt>0.9.1</jjwt>
+        <jaxb-api>2.3.1</jaxb-api>
+    </properties>
+
+    <!-- 依赖版本管理 -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Spring Boot 核心（提供 @Component 等注解） -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+
+            <!-- 配置文件处理器（提供 @ConfigurationProperties） -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${spring.boot.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- MyBatis 整合 Spring Boot -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+
+            <!-- Lombok 简化实体类代码 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- Knife4j 集成 Swagger 生成接口 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!--阿里云OSS: 文件上传-->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun.sdk.oss}</version>
+            </dependency>
+
+            <!--jwt: 令牌生成-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt}</version>
+            </dependency>
+
+            <!-- jaxb-api: 兼容JDK11 -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb-api}</version>
+            </dependency>
+
+            <!-- 引入其他子模块 -->
+            <dependency>
+                <groupId>com.mirror</groupId>
+                <artifactId>abyss-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mirror</groupId>
+                <artifactId>abyss-pojo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.mirror</groupId>
+                <artifactId>abyss-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+        </dependencies>
+
+
+    </dependencyManagement>
+
+</project>
